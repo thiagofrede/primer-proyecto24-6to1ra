@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProductosComponent } from './productos/productos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 //IMPORTAMOS COMPONENTES GLOBALES
 import { SharedModule } from './modules/shared/shared.module';
 

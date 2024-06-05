@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MenuComponent } from './menu/menu.component';
-import { ProductosComponent } from './productos/productos.component';
-import { AppComponent } from './app.component';
 import { InicioComponent } from './modules/inicio/pages/inicio/inicio.component';
 
 const routes: Routes = [
@@ -14,7 +11,10 @@ const routes: Routes = [
   },
   {
     path:"",loadChildren:()=>import('./modules/productos/productos.module').then(m=>m.ProductosModule)
-  }      
+  },
+  {
+    path:"",loadChildren:()=>import('./modules/autentificacion/autentificacion-routing.module').then(m=>m.AutentificacionRoutingModule)
+  },
 ];
 
 @NgModule({
