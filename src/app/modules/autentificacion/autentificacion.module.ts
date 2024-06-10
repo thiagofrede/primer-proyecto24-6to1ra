@@ -6,11 +6,11 @@ import { AutentificacionRoutingModule } from './autentificacion-routing.module';
 import { RegistroComponent } from './page/registro/registro.component';
 import { IniciosesionComponent } from './page/iniciosesion/iniciosesion.component';
 // Componentes de material
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 //Componentes Angular
 import { FormsModule } from '@angular/forms';
@@ -27,11 +27,11 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-   MatSelectModule,
+    MatSelectModule,
     //Angular
     FormsModule
   ],
-  exports:[
+  exports: [
     RegistroComponent,
     IniciosesionComponent,
     MatIconModule,
