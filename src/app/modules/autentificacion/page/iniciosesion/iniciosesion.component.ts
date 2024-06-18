@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+
+//importamos el router, auth y firestore servicio
+import { AuthService } from '../../services/auth.service';
+import { Route, Router } from '@angular/router';
+import { FirestoreService } from 'src/app/modules/shared/services/firestore.service';
 @Component({
   selector: 'app-iniciosesion',
   templateUrl: './iniciosesion.component.html',
@@ -10,7 +15,7 @@ export class IniciosesionComponent {
   hide = true
 
   //Crear una coleccion para usuarios
-  coleccionUsuariosLocales: Usuario[] = [];
+  /*coleccionUsuariosLocales: Usuario[] = [];
 
 
   constructor() {
@@ -45,7 +50,15 @@ export class IniciosesionComponent {
     ]
 
 
-  }
+}*/
+
+constructor(
+  public serviceauth: AuthService,
+  public servicioFirestore: FirestoreService,
+  public servicioRutas: Router
+){
+  
+}
 
   usuarios: Usuario = {
     uid: '',
@@ -57,6 +70,7 @@ export class IniciosesionComponent {
   }
   //Funcion para el inicio de sesion
   iniciosesion() {
+    /*
     const credenciales = {
       uid: this.usuarios.uid,
       nombre: this.usuarios.nombre,
@@ -87,7 +101,7 @@ export class IniciosesionComponent {
 
     //por consola
     console.log(credenciales);
-    console.log(this.coleccionUsuariosLocales);
+    console.log(this.coleccionUsuariosLocales);*/
     this.limpiarinputs();
   }
   
