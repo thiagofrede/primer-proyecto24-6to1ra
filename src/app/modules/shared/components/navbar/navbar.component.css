@@ -2,3 +2,33 @@
     flex: 1 1 auto;
   }
   
+
+  /*encapsula estilos para pantallas mas chicas*/
+  @media(min-width: 300px) and (max-width:700px){
+
+    mat-tolbar{
+      background-color: purple;
+    }
+
+    #menuInicio{
+      display: none;
+    }
+
+    #menuProducto{
+      display: none;
+    }
+
+
+  }
+
+
+  /*encapsula estilos para pantallas mas grandes eje-> computadora y televisor*/
+  @media(min-width:700px){
+    mat-tolbar{
+      background-color: blue;
+    }
+
+    #menuSecciones{
+      display: none;
+    }
+  }

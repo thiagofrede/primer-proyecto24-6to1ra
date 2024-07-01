@@ -15,13 +15,30 @@ import { FirestoreService } from 'src/app/modules/shared/services/firestore.serv
 })
 export class RegistroComponent {
 
+  //Este "hide" es para el input de contraseña
 
+  hide = true;
 
   constructor(
     public servicioAuth: AuthService,
     public servicioFirestore: FirestoreService,
     public servicioRutas: Router
   ){}
+
+
+  
+  // Importacion del Modelo / Interfaz
+  usuarios: Usuario= {
+    uid:'',
+    nombre:'',
+    apellido:'',
+    email:'',
+    password:'',
+    rol:'',
+  }
+  
+   //Crear una coleccion para usuarios
+   coleccionUsuarios: Usuario[] = [];
 
   async guardarUsuario(){
     this.servicioFirestore.agregarUsuario(this.usuarios, this.usuarios.uid)
@@ -57,35 +74,34 @@ export class RegistroComponent {
 
 
 
-  //Este "hide" es para el input de contraseña
-  hide = true;
-  // Importacion del Modelo / Interfaz
-  usuarios: Usuario= {
-    uid:'',
-    nombre:'',
-    apellido:'',
-    email:'',
-    password:'',
-    rol:'',
-  }
-
-   //Crear una coleccion para usuarios
-   coleccionUsuarios: Usuario[] = [];
    //Funcion para el registro
-   registrar(){
+   async registrar(){
        const credenciales = {
-           uid:this.usuarios.uid,
-           nombre:this.usuarios.nombre,
-           apellido:this.usuarios.apellido,
            email:this.usuarios.email,
            password:this.usuarios.password,
-           rol:this.usuarios.rol
        }
-//enviamos los nuevos registros por medio del metodo push a la coleccion
-       this.coleccionUsuarios.push(credenciales);
+       const res = await this.servicioAuth.registrar(credenciales.email,credenciales.password)
+       //metodo then devuelve algo si esta todo bien
+       .then(res=>{
+        alert("te registraste con exito")
+        //el metodo navigate nos redirecciona a otra vista
+        this.servicioRutas.navigate(['/inicio'])
+       })
+       //el metodo cath captura una falla y la devuelve cuando la promesa salga mal
+       .cath(error =>{
+        alert("hubo un error al registrar un nuevo usuario:")
+       })
 
-       //por consola
-       console.log(credenciales);
+       const uid = await this.servicioAuth.obtenerUid();
+       this.usuarios.uid =uid;
+       this.guardarUsuario();
+       //limpiamos a la funcion para guardar datos
+       this.limpiarinputs();
+
+       localStorage.setItem(this.usuarios.email, JSON.stringify(credenciales))
+       //
+//enviamos los nuevos registros por medio del metodo push a la coleccion
+     
        
    }
 

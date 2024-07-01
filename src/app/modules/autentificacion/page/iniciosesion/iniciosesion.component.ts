@@ -69,7 +69,7 @@ constructor(
     rol: '',
   }
   //Funcion para el inicio de sesion
-  iniciosesion() {
+  async iniciosesion() {
     /*
     const credenciales = {
       uid: this.usuarios.uid,
@@ -103,6 +103,21 @@ constructor(
     console.log(credenciales);
     console.log(this.coleccionUsuariosLocales);*/
     this.limpiarinputs();
+    const credenciales ={
+      email: this.usuarios.email,
+      password: this.usuarios.password
+    }
+    const res = await this.servicioAuth.IniciarSesion(credenciales.email, credenciales.password)
+    .then(res=>{
+      alert('se pudo ingresar con exito');
+
+      this.servicioRutas.navigate(['/inicio'])
+    })
+    .catch(err =>{
+      alert('hubo un problema al iniciar sesion:')
+
+      this.limpiarinputs
+    })
   }
   
   limpiarinputs() {
