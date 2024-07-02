@@ -1,4 +1,5 @@
 <mat-toolbar>
+   
     <button id="menuSecciones" mat-icon-button class="example-icon" [matMenuTriggerFor]="seccion" >
         <mat-icon>menu</mat-icon>
     </button>
@@ -12,7 +13,7 @@
 
 
 
-    <span>My App</span>
+   
     <!--boton para la vista de inicio-->
     <button mat-button routerLink="/inicio">Inicio</button>
     <!--menu desplegable -> productos-->
@@ -29,7 +30,6 @@
         <button mat-menu-item routerLink="/casas">Casas</button>
     </mat-menu>
 
-    <span class="example-spacer"></span>
     <!--Inicio de sesuib y el registro de un nuevo usuario-->
     <button mat-icon-button [matMenuTriggerFor]="usuario"><mat-icon>person</mat-icon></button>
     <mat-menu #usuario="matMenu">
@@ -40,4 +40,5 @@
 
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"> <mat-icon>shopping_cart</mat-icon>
     </button>
+    <div><h1>De familia</h1></div>
 </mat-toolbar>

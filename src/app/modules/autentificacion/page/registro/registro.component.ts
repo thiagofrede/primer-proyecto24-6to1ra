@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+
 //imprranis servicio de autentificaccion
+
 import { AuthService } from '../../services/auth.service';
 //importamos componnetes de rutas de aangular
+
 import { Route, Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import * as CryptoJS from 'crypto-js';
 
 //importamos el firestoreservice
 import { FirestoreService } from 'src/app/modules/shared/services/firestore.service';
@@ -40,18 +44,9 @@ export class RegistroComponent {
    //Crear una coleccion para usuarios
    coleccionUsuarios: Usuario[] = [];
 
-  async guardarUsuario(){
-    this.servicioFirestore.agregarUsuario(this.usuarios, this.usuarios.uid)
-    .then(res => {
-      console.log(this.usuarios);
-    })
-    .catch(err=>{
-      console.log("error =>" +err)
-    })
-  }
-      /**
+      
      
-     */
+     Limpiarinputs(){
       const input = {
         uid: this.usuarios.uid = "",
         nombre: this.usuarios.nombre = "",
@@ -77,9 +72,10 @@ export class RegistroComponent {
    //Funcion para el registro
    async registrar(){
        const credenciales = {
-           email:this.usuarios.email,
-           password:this.usuarios.password,
+           email: this.usuarios.email,
+           password: this.usuarios.password
        }
+      
        const res = await this.servicioAuth.registrar(credenciales.email,credenciales.password)
        //metodo then devuelve algo si esta todo bien
        .then(res=>{
@@ -88,22 +84,38 @@ export class RegistroComponent {
         this.servicioRutas.navigate(['/inicio'])
        })
        //el metodo cath captura una falla y la devuelve cuando la promesa salga mal
-       .cath(error =>{
+       .catch(error =>{
         alert("hubo un error al registrar un nuevo usuario:")
        })
+
 
        const uid = await this.servicioAuth.obtenerUid();
        this.usuarios.uid =uid;
        this.guardarUsuario();
        //limpiamos a la funcion para guardar datos
-       this.limpiarinputs();
+       this.Limpiarinputs();
 
-       localStorage.setItem(this.usuarios.email, JSON.stringify(credenciales))
+      
        //
 //enviamos los nuevos registros por medio del metodo push a la coleccion
      
+//
+
        
    }
 
-}
+   async guardarUsuario(){
+    this.servicioFirestore.agregarUsuario(this.usuarios, this.usuarios.uid)
+    .then(res => {
+      console.log(this.usuarios);
+    })
+    .catch(err=>{
+      console.log("error =>" +err)
+    })
+  }
+  /*SHA256: es un algoritmo de hash seguro que toma una entrada(en este caso lo contrario)
+  y produce una caddena de cracateres exadecimal que va a representar a su hash 
+  toString: convierte el resultado en la cadena de caracteres legible */
+    this.usuario.password = CryptoJS.SHA256(this.usuarios.password).toString();
 
+  }
